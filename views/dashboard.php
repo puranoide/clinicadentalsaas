@@ -24,19 +24,37 @@ if(!isset($_SESSION['correo'])) {
     <div class="dashboard">
         <h2>Dashboard</h2>
         <p>Bienvenido, <?php echo $_SESSION['correo']; ?>.</p>
-    </div class=container-float-citas>
-    <input type="date">
-    <div>
-        <div class="container-float-citas">
-            <label for="citas">paciente</label>
-            <label for="citas">Hora</label>
+    </div >
+    
+    <div class="citas_hoy_container">
+        <h4>Citas de hoy</h4>
+    <input type="date" id="citas_hoy">
+        <div class="citas"></div>
+        <div class="float-citas">
+            <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+            <label for="citas">03-03-2025 6:00 PM</label>
         </div>
-        <div class="container-float-citas">
-            <label for="citas">paciente</label>
-            <label for="citas">Hora</label>
+        <div class="float-citas">
+        <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+        <label for="citas">03-03-2025 6:00 PM</label>
+        </div>
+        <div class="float-citas">
+            <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+            <label for="citas">03-03-2025 6:00 PM</label>
+        </div>
+        <div class="float-citas">
+        <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+        <label for="citas">03-03-2025 6:00 PM</label>
+        </div>
+        <div class="float-citas">
+            <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+            <label for="citas">03-03-2025 6:00 PM</label>
+        </div>
+        <div class="float-citas">
+        <label for="citas">Angel Gabriel Acosta Sanchez</label><br>
+        <label for="citas">03-03-2025 6:00 PM</label>
         </div>
     </div>
-    <div>
 
     </div>
     <script src="../assets/js/dashboard/dashboard.js"></script>

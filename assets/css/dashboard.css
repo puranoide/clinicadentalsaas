@@ -28,3 +28,76 @@ header h1{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.citas_hoy_container{
+    width: 20%;
+    position: fixed;
+    left: 1%;
+    top: 60%;
+    transform: translateY(-60%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 5px;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.citas_hoy_container h4{
+    color: #76a0ae;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.citas_hoy_container input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #76a0ae;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.float-citas{
+    margin: 10px;
+    padding: 20px;
+    background-color: #76a0ae;
+    color: white;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.citas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    max-height: calc(80vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
