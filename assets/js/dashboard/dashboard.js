@@ -93,6 +93,8 @@ function renderCitas(citas, loadingMessage) {
   
   if (!citas || citas.length === 0) {
     loadingMessage.textContent = "No se encontraron citas para esta fecha";
+    loadingMessage.classList.remove("loading-spinner");
+    
     conteiner_citas.appendChild(loadingMessage);
     return;
   }
@@ -107,8 +109,8 @@ document.getElementById("citas_hoy").value = getTodayDate();
 window.onload = async function () {
   const conteiner_citas = document.getElementById("citas");
   const loadingMessage = document.createElement("div");
-  loadingMessage.textContent = "Cargando citas...";
-  loadingMessage.classList.add("loading-message");
+  
+  loadingMessage.classList.add("loading-spinner");
   conteiner_citas.appendChild(loadingMessage);
 
   const citas = await fetchCitas(document.getElementById("citas_hoy").value);
@@ -121,8 +123,7 @@ document
   .addEventListener("change", async function () {
     const conteiner_citas = document.getElementById("citas");
     const loadingMessage = document.createElement("div");
-    loadingMessage.textContent = "Cargando citas...";
-    loadingMessage.classList.add("loading-message");
+    loadingMessage.classList.add("loading-spinner");
     conteiner_citas.appendChild(loadingMessage);
     const citas = await fetchCitas(this.value);
     renderCitas(citas, loadingMessage);
