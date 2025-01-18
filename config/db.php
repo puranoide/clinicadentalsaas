@@ -1,4 +1,9 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "saas_cd";
+$conexion = mysqli_connect($servername,$username,$password,$database);
 
 
 
@@ -186,3 +191,4 @@ COLLATE=utf8mb4_general_ci;
 
 
 */
+?>
