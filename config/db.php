@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "saas_cd";
+$database = "SaaS_CD";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
 

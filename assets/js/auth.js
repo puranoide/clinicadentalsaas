@@ -18,8 +18,10 @@ function login(username, password) {
         console.log("Respuesta del servidor:", data);
         // Handle successful login response
         if (data.success) {
+            console.log("Login exitoso");
+            console.log(data);
             // Redirect or update UI on successful login
-            window.location.href = "views/dashboard.php"; 
+            //window.location.href = "views/dashboard.php"; 
         } else {
             // Show error message
             alert(data.message || "Credenciales incorrectas");
