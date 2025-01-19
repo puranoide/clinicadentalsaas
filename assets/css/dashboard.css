@@ -119,3 +119,76 @@ header h1{
         transform: rotate(360deg);
     }
 }
+
+.container_formBusqueda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 30%;
+    background-color: #f1f1f1;
+    max-height: calc(80vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 50px auto;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 5px;
+}
+
+
+.container_formBusqueda .formBusqueda{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container_formBusqueda .formBusqueda label{
+    width: 20%;
+    margin-right: 1%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #76a0ae;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.container_formBusqueda .formBusqueda input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #76a0ae;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container_formBusqueda .formBusqueda button{
+    width: 20%;
+    margin-left: 1%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #76a0ae;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container_formBusqueda .formBusqueda button:hover{   
+    background-color: #f1f1f1;
+    color: #76a0ae;
+}

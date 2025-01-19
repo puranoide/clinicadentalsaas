@@ -37,6 +37,14 @@ if (!isset($_SESSION['correo'])) {
         </div>
 
     </div>
+
+    <div class="container_formBusqueda">
+        <div class="formBusqueda">
+            <label for="buscar">DNI:</label>
+            <input type="text" id="dniabuscar" name="buscar">
+            <button type="button" id="btn_buscar_dni">Buscar</button>
+        </div>
+    </div>
     <script src="../assets/js/dashboard/dashboard.js"></script>
 </body>
 

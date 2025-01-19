@@ -41,7 +41,7 @@ function formatCitaDate(date) {
 function createCitaElement(cita) {
   const conteinerflotante = document.createElement("div");
   conteinerflotante.classList.add("float-citas");
-  conteinerflotante.addEventListener("click", function() {
+  conteinerflotante.addEventListener("click", function () {
     console.log(cita);
   });
   const labelPaciente = document.createElement("label");
@@ -90,11 +90,11 @@ async function fetchCitas(date) {
 function renderCitas(citas, loadingMessage) {
   const conteiner_citas = document.getElementById("citas");
   conteiner_citas.innerHTML = "";
-  
+
   if (!citas || citas.length === 0) {
     loadingMessage.textContent = "No se encontraron citas para esta fecha";
     loadingMessage.classList.remove("loading-spinner");
-    
+
     conteiner_citas.appendChild(loadingMessage);
     return;
   }
@@ -109,7 +109,7 @@ document.getElementById("citas_hoy").value = getTodayDate();
 window.onload = async function () {
   const conteiner_citas = document.getElementById("citas");
   const loadingMessage = document.createElement("div");
-  
+
   loadingMessage.classList.add("loading-spinner");
   conteiner_citas.appendChild(loadingMessage);
 
@@ -129,3 +129,22 @@ document
     renderCitas(citas, loadingMessage);
   });
 
+
+function verifyDni(dni) {
+  dniParseado = dni.replace(/^\s+|\s+$/g, '');
+  if (dniParseado == "") {
+    alert("Ingrese un dni");
+    return false;
+  }
+  return dniParseado;
+}
+
+document.getElementById("btn_buscar_dni").addEventListener("click", function () {
+  var dniInput = document.getElementById("dniabuscar");
+  var dni = verifyDni(dniInput.value);
+  if (dni === false) {
+    dniInput.value = "";
+    return;
+  }
+  alert("dni a buscar: " + dni);
+});
