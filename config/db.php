@@ -5,10 +5,6 @@ $password = "";
 $database = "SaaS_CD";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
-
-
-
-
 /*
 
 

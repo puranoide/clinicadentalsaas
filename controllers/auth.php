@@ -24,6 +24,7 @@ function login($conexion, $correo, $contraseña) {
 
 // Verify if receiving POST request with JSON
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     // Set response header as JSON
     header('Content-Type: application/json');
     
