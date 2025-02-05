@@ -69,6 +69,8 @@ CREATE TABLE SaaS_CD.paciente (
 	CONSTRAINT paciente_usuario_FK FOREIGN KEY (userid) REFERENCES SaaS_CD.usuario(id),
 	CONSTRAINT paciente_sede_FK FOREIGN KEY (sedeid) REFERENCES SaaS_CD.sede(id)
 )
+	ALTER TABLE saas_cd.paciente ADD nombreCompleto varchar(150) NULL;
+
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;

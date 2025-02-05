@@ -37,6 +37,17 @@ if (!isset($_SESSION['correo'])) {
         </div>
 
     </div>
+
+    <div class="formulariodebusqueda">
+        <form action="../controllers/paciente.php" method="post" id="formBuscar">
+            <label for="dni">DNI:</label>
+            <input type="number" id="dni" name="dni" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div class="contenidousuario" id="contenidousuario">
+
+    </div>
     <script src="../assets/js/dashboard/dashboard.js"></script>
 </body>
 

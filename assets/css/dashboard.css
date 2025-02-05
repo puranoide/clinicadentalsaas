@@ -39,8 +39,8 @@ header h1{
     width: 20%;
     position: fixed;
     left: 1%;
-    top: 60%;
-    transform: translateY(-60%);
+    top: 50%;
+    transform: translate(10%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,6 +109,74 @@ header h1{
     width: 20px;
     height: 20px;
     animation: spin 1s linear infinite;
+}
+
+.formulariodebusqueda{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+
+
+}
+
+.formulariodebusqueda label{
+    color: #76a0ae;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.formulariodebusqueda input{
+    width: 40%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #76a0ae;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.formulariodebusqueda button{
+    width: 40%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #76a0ae;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contenidousuario{
+    display: none;
+    margin: 50px 35%; ;
+    padding: 20px;
+    background-color: #76a0ae;
+    color: white;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 5px;
+    text-align: center;
+    width: 30%;
+    cursor: pointer;
+}
+.contenidousuario p{
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 @keyframes spin {
