@@ -27,6 +27,15 @@ if (!isset($_SESSION['correo'])) {
     <div class="dashboard">
         <h2>Dashboard</h2>
         <p>Bienvenido, <?php echo $_SESSION['correo']; ?>.</p>
+        <?php
+        if ($_SESSION['idrol'] == 1) {
+            echo '<p>Has iniciado sesión como administrador.</p>';
+        } elseif ($_SESSION['idrol'] == 2) {
+            echo '<p>Has iniciado sesión como atencion al cliente.</p>';
+        }?>
+
+        <p id="salir" class="salir">cerrar session</p>
+
     </div>
 
     <div class="citas_hoy_container">

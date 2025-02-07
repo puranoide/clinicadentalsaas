@@ -157,27 +157,51 @@ document.getElementById('formBuscar').addEventListener('submit', function (event
           conteinerUsuario.innerHTML = "";
           // Aquí puedes agregar código para manejar la respuesta de éxito
           var pCodPaciente = document.createElement("p");
+          pCodPaciente.classList.add("codpaciente");
           pCodPaciente.textContent = "DNI: " + data.paciente.dni;
           var pNombre = document.createElement("p");
+          pNombre.classList.add("nombrepaciente");
           pNombre.textContent = "Nombre: " + data.paciente.nombreCompleto;
           var pEstado = document.createElement("p");
 
           if (data.paciente.estado == 1) {
-            pEstado.textContent = "tratamiendo activo";
+            pEstado.textContent = "ACTIVO";
             pEstado.style.color = "green";
+            pEstado.style.fontWeight = "bold";
+            pEstado.style.textDecoration = "underline";
+            pEstado.style.fontSize = "16px";
+            pEstado.style.padding = "10px";
           } else {
-            pEstado.textContent = "tratamiendo inactivo";
+            pEstado.textContent = "INACTIVO";
             pEstado.style.color = "red";
+            pEstado.style.fontWeight = "bold";
+            pEstado.style.textDecoration = "underline";
+            pEstado.style.fontSize = "16px";
+            pEstado.style.padding = "10px";
+            
           }
 
           var divCitas = document.createElement("div");
           divCitas.id = "citas";
           divCitas.classList.add("citasporpaciente");
+
           for (var i = 0; i < data.citas.length; i++) {
+
             var cita = data.citas[i];
-            var citaElement = document.createElement("p");
-            citaElement.textContent = "Cita " + cita.detalle + " - " + formatCitaDate(cita.fecha);
-            divCitas.appendChild(citaElement);
+            var elementocita=document.createElement("div");
+            elementocita.classList.add("cita_element");
+            var citafecha = document.createElement("p");
+            citafecha.classList.add("cita_fecha");
+            ;
+            citafecha.textContent = "Fecha: " + formatCitaDate(cita.fecha);
+            var citaDescripcion = document.createElement("p");
+            citaDescripcion.classList.add("cita_descripcion");
+            citaDescripcion.textContent = "Descripcion: " + cita.detalle;
+            
+            elementocita.appendChild(citafecha);
+            elementocita.appendChild(citaDescripcion);
+
+            divCitas.appendChild(elementocita);
           }
           conteinerUsuario.appendChild(pNombre);
           conteinerUsuario.appendChild(pCodPaciente);
@@ -188,13 +212,16 @@ document.getElementById('formBuscar').addEventListener('submit', function (event
 
           // "Usuario agregado"
 
-        } else {
+        } else if (data.success === false) {
           console.log(data + "Usuario no encontrado");
+          console.log(data);
+          console.log("entra aca");
+          conteinerUsuario.style.display = "block";
           conteinerUsuario.innerHTML = "";
-          var pCodPaciente = document.createElement("p");
-          pCodPaciente.textContent = "DNI: " + data.message;
-          conteinerUsuario.appendChild(pCodPaciente);
-          // Aquí puedes agregar código para manejar la respuesta de error
+          var pError = document.createElement("p");
+          pError.classList.add("error");
+          pError.textContent = data.message;
+          conteinerUsuario.appendChild(pError);
         }
       } catch (error) {
         console.error(error);
@@ -204,3 +231,24 @@ document.getElementById('formBuscar').addEventListener('submit', function (event
       console.error(error); // Maneja cualquier error que ocurra
     });
 });
+
+
+document.getElementById('salir').addEventListener('click', function () {
+  fetch('http://localhost/clinicadentalsaas/controllers/auth.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      action: 'logout'
+    })
+  })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+      window.location.href = "../index.php";
+    })
+    .catch(error => {
+      alert(data.message);
+    });
+})

@@ -21,6 +21,11 @@ function login($conexion, $correo, $contraseña) {
         return false;
     }
 }
+function logout() {
+    session_start();
+    session_destroy();
+    return true;
+}
 
 // Verify if receiving POST request with JSON
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -59,6 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['error' => $e->getMessage()]);
             }
             break;
+        
+        case 'logout':
+            $response = logout();
+            if ($response) {
+                echo json_encode(['success' => 'logout exitoso','message' => 'Sesión cerrada correctamente']);
+            }
+            else {
+                echo json_encode(['error' => 'logout fallido']);
+            }
+            break;    
         default:
             echo json_encode(['success' => false]);
             break;

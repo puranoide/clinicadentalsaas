@@ -160,8 +160,9 @@ header h1{
 }
 
 .contenidousuario{
+   
     display: none;
-    margin: 50px 35%; ;
+    margin: 50px 25%; ;
     padding: 20px;
     background-color: #76a0ae;
     color: white;
@@ -169,14 +170,77 @@ header h1{
     z-index: 100;
     border-radius: 5px;
     text-align: center;
-    width: 30%;
-    cursor: pointer;
+    width: 50%;
 }
-.contenidousuario p{
+.contenidousuario .codpaciente{
     color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;  
+    padding: 10px;
+   
+}
+.contenidousuario .nombrepaciente{
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;  
+    padding: 10px;
+    
+}
+.citasporpaciente{
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    background-color: #76a0ae;
+    color: white;
+    border: none;
+    z-index: 100;
+    width: 100%;
+
+}
+.cita_element{
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    z-index: 100;
+    width: 100%;
+}
+.cita_fecha{
+    width: 40%;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    color: #76a0ae;
+    padding: 10px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    display: inline-block;
+    text-align: start;
+}
+.cita_descripcion{
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    padding: 10px;
+    text-align: start;
+    font-size: 16px;
+
+    font-weight: bold;
+    display: inline-block;
+}
+.error{
+    color: red;
+}
+.salir{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 20px;
+    color: #e43a1c;
+    cursor: pointer;
+}
+
+.salir:hover{
+    color: #ff0000;
+    transform: scale(1.2);
 }
 
 @keyframes spin {
