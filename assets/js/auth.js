@@ -20,12 +20,12 @@ function login(username, password) {
         if (data.success) {
             console.log("Login exitoso");
             console.log(data);
-            // Redirect or update UI on successful login
-            window.location.href = "views/dashboard.php"; 
-        } else {
-            // Show error message
-            alert(data.message || "Credenciales incorrectas");
-        }
+            console.log("Redirigiendo a la vista...");
+            window.location.href = "views/dashboard.php";
+            console.log("Redirección exitosa");
+          } else {
+            console.log("Error en el login");
+          }
     })
     .catch((error) => {
         console.error("Error:", error);
