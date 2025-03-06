@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$database = "SaaS_CD";
+$username = "u685818680_puranoadmin";
+$password = "yS1~xyK!8+";
+$database = "u685818680_SaasDental";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
 /*
