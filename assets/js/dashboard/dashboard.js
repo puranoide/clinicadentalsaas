@@ -167,7 +167,7 @@ function renderPaciente(data) {
 // Buscar paciente por DNI
 async function buscarPacientePorDni(dni) {
   try {
-    const response = await fetch("http://localhost/clinicadentalsaas/controllers/paciente.php", {
+    const response = await fetch("../controllers/paciente.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "get_pacientebyDni", dni }),
@@ -192,7 +192,7 @@ function handleFormSubmit(event) {
 // Manejar el logout
 async function handleLogout() {
   try {
-    const response = await fetch("http://localhost/clinicadentalsaas/controllers/auth.php", {
+    const response = await fetch("../controllers/auth.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "logout" }),
