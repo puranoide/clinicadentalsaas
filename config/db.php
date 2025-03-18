@@ -1,12 +1,15 @@
 <?php
 $servername = "localhost";
-$username = "u685818680_puranoadmin";
-$password = "yS1~xyK!8+";
-$database = "u685818680_SaasDental";
+$username = "root";
+$password = "";
+$database = "SaasDental";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
 /*
-
+$servername = "localhost";
+$username = "u685818680_puranoadmin";
+$password = "yS1~xyK!8+";
+$database = "u685818680_SaasDental";
 
 CREATE TABLE SaaS_CD.sede (
 	id INT auto_increment NOT NULL,
