@@ -269,6 +269,36 @@ header h1 {
     background-color: #76a0ae;
     color: #f1f1f1;
 }
+.conteainerAgregarPaciente {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6d6f6f9e;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    text-align: center;
+    width: 80%;
+    
+}
+.conteainerAgregarPaciente .cerrarButtonFloat{
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #e29494;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 @keyframes spin {
     0% {

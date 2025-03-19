@@ -14,7 +14,7 @@ const conteinerCitas = document.getElementById("citas");
 const inputFechaCitas = document.getElementById("citas_hoy");
 const formBuscar = document.getElementById("formBuscar");
 const btnSalir = document.getElementById("salir");
-
+const conteainerAgregarPaciente = document.getElementById("conteainerAgregarPaciente");
 // Utilidad para obtener la fecha actual en formato YYYY-MM-DD
 function getTodayDate() {
   const today = new Date();
@@ -159,7 +159,7 @@ function renderPaciente(data) {
   const buttonAgregarCita = document.createElement("button");
   buttonAgregarCita.classList.add("agregar_cita");
   buttonAgregarCita.textContent = "Agregar Cita";
-  buttonAgregarCita.addEventListener("click", () => alert("Cita Agregada"));
+  buttonAgregarCita.addEventListener("click", renderAgregarPaciente);
 
   conteinerUsuario.append(pNombre, pCodPaciente, pEstado, divCitas, buttonAgregarCita);
 }
@@ -179,6 +179,19 @@ async function buscarPacientePorDni(dni) {
     console.error("Error al buscar paciente:", error);
     renderPaciente({ success: false, message: "Error al buscar paciente" });
   }
+}
+//funcion para renderizar el componente de agregar paciente
+
+function renderAgregarPaciente() {
+    conteainerAgregarPaciente.style.display = "block";
+    var buttonCerrar = document.createElement("button");
+    buttonCerrar.classList.add("cerrarButtonFloat");
+    buttonCerrar.textContent = "Cerrar";
+    buttonCerrar.addEventListener("click", function() {
+        conteainerAgregarPaciente.style.display = "none";
+        conteainerAgregarPaciente.innerHTML = "";
+    });
+    conteainerAgregarPaciente.appendChild(buttonCerrar);
 }
 
 // Manejar el formulario de búsqueda

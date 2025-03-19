@@ -57,6 +57,11 @@ if (!isset($_SESSION['correo'])) {
     <div class="contenidousuario" id="contenidousuario">
 
     </div>
+    
+    <div class="conteainerAgregarPaciente" id="conteainerAgregarPaciente">
+
+    </div>
+
     <script src="../assets/js/dashboard/dashboard.js"></script>
 </body>
 
