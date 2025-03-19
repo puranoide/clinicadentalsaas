@@ -15,6 +15,8 @@ const inputFechaCitas = document.getElementById("citas_hoy");
 const formBuscar = document.getElementById("formBuscar");
 const btnSalir = document.getElementById("salir");
 const conteainerAgregarPaciente = document.getElementById("conteainerAgregarPaciente");
+
+const CitaInfoContainer = document.getElementById("CitaInfo");
 // Utilidad para obtener la fecha actual en formato YYYY-MM-DD
 function getTodayDate() {
   const today = new Date();
@@ -35,7 +37,7 @@ function formatCitaDate(date) {
 function createCitaElement(cita) {
   const conteinerFlotante = document.createElement("div");
   conteinerFlotante.classList.add("float-citas");
-  conteinerFlotante.addEventListener("click", () => console.log(cita));
+  conteinerFlotante.addEventListener("click", () => RenderCitaData(cita));
 
   conteinerFlotante.innerHTML = `
     <label>ID cita: ${cita.id}</label><br>
@@ -46,6 +48,29 @@ function createCitaElement(cita) {
   return conteinerFlotante;
 }
 
+function RenderCitaData(cita) {
+  console.log(cita);
+  CitaInfoContainer.style.display = "block";
+  var buttonCerrar = document.createElement("button");
+  buttonCerrar.classList.add("cerrarButtonFloat");
+  buttonCerrar.textContent = "Cerrar";
+  buttonCerrar.addEventListener("click", function() {
+    CitaInfoContainer.style.display = "none";
+    CitaInfoContainer.innerHTML = "";
+  });
+
+
+
+  CitaInfoContainer.innerHTML = `
+    <label>Paciente procediente de : ${cita.paciente.procedencia}</label><br>
+    <label>DNI: ${cita.paciente.dni}</label><br>
+    <label>Descripción: ${cita.detalle}</label>
+    <br>  <br>  <br>  
+  `;
+
+  CitaInfoContainer.appendChild(buttonCerrar);
+
+}
 // Obtener citas desde el servidor
 async function fetchCitas(date) {
   try {
@@ -159,7 +184,7 @@ function renderPaciente(data) {
   const buttonAgregarCita = document.createElement("button");
   buttonAgregarCita.classList.add("agregar_cita");
   buttonAgregarCita.textContent = "Agregar Cita";
-  buttonAgregarCita.addEventListener("click", renderAgregarPaciente);
+  buttonAgregarCita.addEventListener("click",() => renderAgregarPaciente(paciente));
 
   conteinerUsuario.append(pNombre, pCodPaciente, pEstado, divCitas, buttonAgregarCita);
 }
@@ -182,7 +207,7 @@ async function buscarPacientePorDni(dni) {
 }
 //funcion para renderizar el componente de agregar paciente
 
-function renderAgregarPaciente() {
+function renderAgregarPaciente(Paciente) {
     conteainerAgregarPaciente.style.display = "block";
     var buttonCerrar = document.createElement("button");
     buttonCerrar.classList.add("cerrarButtonFloat");
@@ -191,8 +216,39 @@ function renderAgregarPaciente() {
         conteainerAgregarPaciente.style.display = "none";
         conteainerAgregarPaciente.innerHTML = "";
     });
+
+    var FormContainer = document.createElement("form");
+    FormContainer.id = "formAgregarPacienteCita";
+    FormContainer.style.display = "block";
+    FormContainer.classList.add("formAgregarPacienteCita");
+
+    var inputDni = document.createElement("input");
+    inputDni.type = "text";
+    inputDni.id = "dni";
+    inputDni.name = "dni";
+    inputDni.value ="Cita para el paciente con dni : "+ Paciente.dni;
+
+    var inputFecha = document.createElement("input");
+    inputFecha.type = "date";
+    inputFecha.id = "fecha";
+    inputFecha.name = "fecha";
+    
+    var inputDetalle = document.createElement("input");
+    inputDetalle.type = "text";
+    inputDetalle.id = "detalle";
+    inputDetalle.name = "detalle";
+    inputDetalle.placeholder = "Detalle de la cita";
+    
+
+    FormContainer.appendChild(inputDni);
+    FormContainer.appendChild(inputFecha);
+    FormContainer.appendChild(inputDetalle);
+    
+
     conteainerAgregarPaciente.appendChild(buttonCerrar);
-}
+    conteainerAgregarPaciente.appendChild(FormContainer);
+    
+  }
 
 // Manejar el formulario de búsqueda
 function handleFormSubmit(event) {

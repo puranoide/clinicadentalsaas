@@ -32,7 +32,7 @@ if (!isset($_SESSION['correo'])) {
             echo '<p>Has iniciado sesión como administrador.</p>';
         } elseif ($_SESSION['idrol'] == 2) {
             echo '<p>Has iniciado sesión como atencion al cliente.</p>';
-        }?>
+        } ?>
 
         <p id="salir" class="salir">cerrar session</p>
 
@@ -57,11 +57,13 @@ if (!isset($_SESSION['correo'])) {
     <div class="contenidousuario" id="contenidousuario">
 
     </div>
-    
+
     <div class="conteainerAgregarPaciente" id="conteainerAgregarPaciente">
 
     </div>
+    <div class="CitaInfo" id="CitaInfo">
 
+    </div>
     <script src="../assets/js/dashboard/dashboard.js"></script>
 </body>
 
