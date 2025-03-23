@@ -12,6 +12,7 @@ function login($conexion, $correo, $contraseña) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         session_start();
+        $_SESSION['id'] = $row['id'];
         $_SESSION['correo'] = $row['correo'];
         $_SESSION['nombre'] = $row['nombres']; 
         $_SESSION['idrol'] = $row['idrol'];
