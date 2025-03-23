@@ -27,7 +27,7 @@ if (!isset($_SESSION['correo'])) {
     <div class="dashboard">
         <h2>Dashboard</h2>
         <p>Bienvenido, <?php echo $_SESSION['correo']; ?>.</p>
-        <p>id: <?php echo $_SESSION['id']; ?>.</p>
+        <span id="idUser" style="display: none;"><?php echo $_SESSION['id']; ?></span>
         <?php
         if ($_SESSION['idrol'] == 1) {
             echo '<p>Has iniciado sesión como administrador.</p>';

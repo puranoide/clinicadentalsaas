@@ -15,6 +15,7 @@ const inputFechaCitas = document.getElementById("citas_hoy");
 const formBuscar = document.getElementById("formBuscar");
 const btnSalir = document.getElementById("salir");
 const conteainerAgregarPaciente = document.getElementById("conteainerAgregarPaciente");
+const iduser=Number(document.getElementById("idUser").textContent);
 
 const CitaInfoContainer = document.getElementById("CitaInfo");
 // Utilidad para obtener la fecha actual en formato YYYY-MM-DD
@@ -276,6 +277,21 @@ async function handleLogout() {
   }
 }
 
+function fetchSedeByid(id) {
+  fetch("../controllers/auth.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "get_sedebyid", iduser:id }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Respuesta del servidor sedes:", data);
+    })
+    .catch((error) => {
+      console.error("Error al obtener sede:", error);
+    });
+}
+
 // Inicialización
 function initialize() {
   inputFechaCitas.value = getTodayDate();
@@ -283,6 +299,7 @@ function initialize() {
   inputFechaCitas.addEventListener("change", handleDateChange);
   formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
+  fetchSedeByid(iduser);
 }
 
 // Ejecutar inicialización
