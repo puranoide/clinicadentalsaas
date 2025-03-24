@@ -113,7 +113,8 @@ function createLoadingSpinner() {
 }
 
 // Cargar citas iniciales al iniciar la página
-async function loadInitialCitas() {
+async function loadInitialCitas(sedes) {
+  alert(sedes)
   const loadingMessage = createLoadingSpinner();
   conteinerCitas.appendChild(loadingMessage);
 
@@ -286,6 +287,9 @@ function fetchSedeByid(id) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Respuesta del servidor sedes:", data);
+      const sedesids = data.sede.map((sede) => sede.idsede);
+      console.log(sedesids);
+      loadInitialCitas(sedesids);
     })
     .catch((error) => {
       console.error("Error al obtener sede:", error);
@@ -295,11 +299,13 @@ function fetchSedeByid(id) {
 // Inicialización
 function initialize() {
   inputFechaCitas.value = getTodayDate();
-  window.onload = loadInitialCitas;
+  
   inputFechaCitas.addEventListener("change", handleDateChange);
   formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
   fetchSedeByid(iduser);
+  
+
 }
 
 // Ejecutar inicialización
