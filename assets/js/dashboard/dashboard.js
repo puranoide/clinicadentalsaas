@@ -286,6 +286,12 @@ function fetchSedeByid(id) {
   })
     .then((response) => response.json())
     .then((data) => {
+      if (!data.success) {
+        const sedesids = [];
+        console.error("el usuario no tiene sede:", sedesids);
+        loadInitialCitas(sedesids);
+        return;
+      }
       console.log("Respuesta del servidor sedes:", data);
       const sedesids = data.sede.map((sede) => sede.idsede);
       console.log(sedesids);
