@@ -42,7 +42,7 @@ function createCitaElement(cita) {
 
   conteinerFlotante.innerHTML = `
     <label>ID cita: ${cita.id}</label><br>
-    <label>Paciente: ${cita.paciente.nombreCompleto}</label><br>
+    <label>Paciente: ${cita.pacienteid}</label><br>
     <label>Fecha: ${formatCitaDate(cita.fecha)}</label>
   `;
 
@@ -73,12 +73,12 @@ function RenderCitaData(cita) {
 
 }
 // Obtener citas desde el servidor
-async function fetchCitas(date) {
+async function fetchCitas(date,sedes) {
   try {
     const response = await fetch("../controllers/citas.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "get_citas", citas_hoy: date }),
+      body: JSON.stringify({ action: "get_citas", citas_hoy: date, sedes: sedes }),
     });
 
     const data = await response.json();
@@ -118,7 +118,7 @@ async function loadInitialCitas(sedes) {
   const loadingMessage = createLoadingSpinner();
   conteinerCitas.appendChild(loadingMessage);
 
-  const citas = await fetchCitas(inputFechaCitas.value);
+  const citas = await fetchCitas(inputFechaCitas.value, sedes);
   renderCitas(citas, loadingMessage);
 }
 
