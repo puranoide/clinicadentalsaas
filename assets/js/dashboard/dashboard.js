@@ -38,6 +38,7 @@ function formatCitaDate(date) {
 function createCitaElement(cita) {
   const conteinerFlotante = document.createElement("div");
   conteinerFlotante.classList.add("float-citas");
+  console.log(cita);
   conteinerFlotante.addEventListener("click", () => RenderCitaData(cita));
 
   conteinerFlotante.innerHTML = `
@@ -63,8 +64,8 @@ function RenderCitaData(cita) {
 
 
   CitaInfoContainer.innerHTML = `
-    <label>Paciente procediente de : ${cita.paciente.procedencia}</label><br>
-    <label>DNI: ${cita.paciente.dni}</label><br>
+    <label>Paciente procediente de : ${cita.procedencia}</label><br>
+    <label>DNI: ${cita.dni}</label><br>
     <label>Descripción: ${cita.detalle}</label>
     <br>  <br>  <br>  
   `;
@@ -123,11 +124,11 @@ async function loadInitialCitas(sedes) {
 }
 
 // Manejar cambio de fecha para actualizar citas
-async function handleDateChange() {
+async function handleDateChange(sedesids) {
   const loadingMessage = createLoadingSpinner();
   conteinerCitas.appendChild(loadingMessage);
-
-  const citas = await fetchCitas(inputFechaCitas.value);
+  console.log('funcion con fecha',inputFechaCitas.value,sedesids);
+  const citas = await fetchCitas(inputFechaCitas.value, sedesids);
   renderCitas(citas, loadingMessage);
 }
 
@@ -296,6 +297,7 @@ function fetchSedeByid(id) {
       const sedesids = data.sede.map((sede) => sede.idsede);
       console.log(sedesids);
       loadInitialCitas(sedesids);
+      inputFechaCitas.addEventListener("change", () => handleDateChange(sedesids));
     })
     .catch((error) => {
       console.error("Error al obtener sede:", error);
@@ -306,7 +308,7 @@ function fetchSedeByid(id) {
 function initialize() {
   inputFechaCitas.value = getTodayDate();
   
-  inputFechaCitas.addEventListener("change", handleDateChange);
+  //inputFechaCitas.addEventListener("change", handleDateChange);
   formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
   fetchSedeByid(iduser);
