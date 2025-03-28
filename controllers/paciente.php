@@ -1,9 +1,14 @@
 <?php
 
-function getpacientebydni($con, $dni)
+function getpacientebydni($con, $dni, $sedes)
 {
-    $sql = "SELECT * FROM paciente WHERE dni = '$dni'";
-    $result = mysqli_query($con, $sql);
+    $placeholders = implode(',', array_fill(0, count($sedes), '?'));
+    $sql = "SELECT * FROM paciente WHERE dni = ? and sedeid IN ($placeholders)";
+    $stmt = mysqli_prepare($con, $sql);
+    $bind_params = array_merge([$dni], $sedes); // Corrected the order of bind parameters
+    mysqli_stmt_bind_param($stmt, 's' . str_repeat('i', count($sedes)), ...$bind_params); // Corrected the types order
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
         $paciente = mysqli_fetch_assoc($result);
         return $paciente;
@@ -49,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Resto del código...
             try {
-                $response = getpacientebydni($conexion, $data['dni']);
+                $response = getpacientebydni($conexion, $data['dni'],$data['sedes']);
 
                 if ($response) {
                     $citas = getPacientecitasbyid($conexion, $response['id']);

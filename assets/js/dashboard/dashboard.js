@@ -193,12 +193,12 @@ function renderPaciente(data) {
 }
 
 // Buscar paciente por DNI
-async function buscarPacientePorDni(dni) {
+async function buscarPacientePorDni(dni,sedesids) {
   try {
     const response = await fetch("../controllers/paciente.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "get_pacientebyDni", dni }),
+      body: JSON.stringify({ action: "get_pacientebyDni", dni,sedes:sedesids }),
     });
 
     const data = await response.json();
@@ -254,11 +254,13 @@ function renderAgregarPaciente(Paciente) {
   }
 
 // Manejar el formulario de búsqueda
-function handleFormSubmit(event) {
+function handleFormSubmit(event,sedesids) {
   event.preventDefault();
+  console.log("Formulario enviado:sedes",sedesids);
+  //alert(sedesids);
   const formData = new FormData(formBuscar);
   const dni = formData.get("dni");
-  buscarPacientePorDni(dni);
+  buscarPacientePorDni(dni,sedesids);
 }
 
 // Manejar el logout
@@ -298,6 +300,7 @@ function fetchSedeByid(id) {
       console.log(sedesids);
       loadInitialCitas(sedesids);
       inputFechaCitas.addEventListener("change", () => handleDateChange(sedesids));
+      formBuscar.addEventListener("submit", () => handleFormSubmit(event,sedesids));
     })
     .catch((error) => {
       console.error("Error al obtener sede:", error);
@@ -309,7 +312,7 @@ function initialize() {
   inputFechaCitas.value = getTodayDate();
   
   //inputFechaCitas.addEventListener("change", handleDateChange);
-  formBuscar.addEventListener("submit", handleFormSubmit);
+  //formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
   fetchSedeByid(iduser);
   
