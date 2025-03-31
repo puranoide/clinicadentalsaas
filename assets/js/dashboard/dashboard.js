@@ -242,10 +242,20 @@ function renderAgregarPaciente(Paciente) {
     inputDetalle.name = "detalle";
     inputDetalle.placeholder = "Detalle de la cita";
     
+    var inputGuardar = document.createElement("input");
+    inputGuardar.type = "submit";
+    inputGuardar.id = "guardar";
+    inputGuardar.value = "Guardar";
+    inputGuardar.addEventListener("click", function(event) {
+        event.preventDefault();
+        alert("Cita guardada");
+        //agregarCita(inputDni.value, inputFecha.value, inputDetalle.value);
+    });
 
     FormContainer.appendChild(inputDni);
     FormContainer.appendChild(inputFecha);
     FormContainer.appendChild(inputDetalle);
+    FormContainer.appendChild(inputGuardar);
     
 
     conteainerAgregarPaciente.appendChild(buttonCerrar);

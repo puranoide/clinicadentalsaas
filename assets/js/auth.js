@@ -24,6 +24,7 @@ function login(username, password) {
             window.location.href = "views/dashboard.php";
             console.log("Redirección exitosa");
           } else {
+            alert("credenciales Incorrectas");
             console.log("Error en el login");
           }
     })
