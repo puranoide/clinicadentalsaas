@@ -174,7 +174,7 @@ function renderPaciente(data) {
 
   const pCodPaciente = document.createElement("p");
   pCodPaciente.classList.add("codpaciente");
-  pCodPaciente.textContent = `DNI: ${paciente.dni}`;
+  pCodPaciente.textContent = `DNI: ${paciente.dni}-Pacienteid: ${paciente.id}`;
 
   const pNombre = document.createElement("p");
   pNombre.classList.add("nombrepaciente");
@@ -229,7 +229,7 @@ function renderAgregarPaciente(Paciente) {
     inputDni.type = "text";
     inputDni.id = "dni";
     inputDni.name = "dni";
-    inputDni.value ="Cita para el paciente con dni : "+ Paciente.dni;
+    inputDni.value =Paciente.dni;
 
     var inputFecha = document.createElement("input");
     inputFecha.type = "date";
@@ -248,7 +248,7 @@ function renderAgregarPaciente(Paciente) {
     inputGuardar.value = "Guardar";
     inputGuardar.addEventListener("click", function(event) {
         event.preventDefault();
-        alert("Cita guardada");
+        alert(`Cita guardada: ${inputDni.value}, ${inputFecha.value}, ${inputDetalle.value}`);
         //agregarCita(inputDni.value, inputFecha.value, inputDetalle.value);
     });
 
