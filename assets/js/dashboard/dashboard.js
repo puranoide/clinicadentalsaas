@@ -15,7 +15,7 @@ const inputFechaCitas = document.getElementById("citas_hoy");
 const formBuscar = document.getElementById("formBuscar");
 const btnSalir = document.getElementById("salir");
 const conteainerAgregarPaciente = document.getElementById("conteainerAgregarPaciente");
-const iduser=Number(document.getElementById("idUser").textContent);
+const iduser = Number(document.getElementById("idUser").textContent);
 
 const CitaInfoContainer = document.getElementById("CitaInfo");
 // Utilidad para obtener la fecha actual en formato YYYY-MM-DD
@@ -56,7 +56,7 @@ function RenderCitaData(cita) {
   var buttonCerrar = document.createElement("button");
   buttonCerrar.classList.add("cerrarButtonFloat");
   buttonCerrar.textContent = "Cerrar";
-  buttonCerrar.addEventListener("click", function() {
+  buttonCerrar.addEventListener("click", function () {
     CitaInfoContainer.style.display = "none";
     CitaInfoContainer.innerHTML = "";
   });
@@ -74,7 +74,7 @@ function RenderCitaData(cita) {
 
 }
 // Obtener citas desde el servidor
-async function fetchCitas(date,sedes) {
+async function fetchCitas(date, sedes) {
   try {
     const response = await fetch("../controllers/citas.php", {
       method: "POST",
@@ -127,7 +127,7 @@ async function loadInitialCitas(sedes) {
 async function handleDateChange(sedesids) {
   const loadingMessage = createLoadingSpinner();
   conteinerCitas.appendChild(loadingMessage);
-  console.log('funcion con fecha',inputFechaCitas.value,sedesids);
+  console.log('funcion con fecha', inputFechaCitas.value, sedesids);
   const citas = await fetchCitas(inputFechaCitas.value, sedesids);
   renderCitas(citas, loadingMessage);
 }
@@ -187,18 +187,18 @@ function renderPaciente(data) {
   const buttonAgregarCita = document.createElement("button");
   buttonAgregarCita.classList.add("agregar_cita");
   buttonAgregarCita.textContent = "Agregar Cita";
-  buttonAgregarCita.addEventListener("click",() => renderAgregarPaciente(paciente));
+  buttonAgregarCita.addEventListener("click", () => renderAgregarPaciente(paciente));
 
   conteinerUsuario.append(pNombre, pCodPaciente, pEstado, divCitas, buttonAgregarCita);
 }
 
 // Buscar paciente por DNI
-async function buscarPacientePorDni(dni,sedesids) {
+async function buscarPacientePorDni(dni, sedesids) {
   try {
     const response = await fetch("../controllers/paciente.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "get_pacientebyDni", dni,sedes:sedesids }),
+      body: JSON.stringify({ action: "get_pacientebyDni", dni, sedes: sedesids }),
     });
 
     const data = await response.json();
@@ -211,66 +211,74 @@ async function buscarPacientePorDni(dni,sedesids) {
 //funcion para renderizar el componente de agregar paciente
 
 function renderAgregarPaciente(Paciente) {
-    conteainerAgregarPaciente.style.display = "block";
-    var buttonCerrar = document.createElement("button");
-    buttonCerrar.classList.add("cerrarButtonFloat");
-    buttonCerrar.textContent = "Cerrar";
-    buttonCerrar.addEventListener("click", function() {
-        conteainerAgregarPaciente.style.display = "none";
-        conteainerAgregarPaciente.innerHTML = "";
-    });
+  conteainerAgregarPaciente.style.display = "block";
+  var buttonCerrar = document.createElement("button");
+  buttonCerrar.classList.add("cerrarButtonFloat");
+  buttonCerrar.textContent = "Cerrar";
+  buttonCerrar.addEventListener("click", function () {
+    conteainerAgregarPaciente.style.display = "none";
+    conteainerAgregarPaciente.innerHTML = "";
+  });
 
-    var FormContainer = document.createElement("form");
-    FormContainer.id = "formAgregarPacienteCita";
-    FormContainer.style.display = "block";
-    FormContainer.classList.add("formAgregarPacienteCita");
+  var FormContainer = document.createElement("form");
+  FormContainer.id = "formAgregarPacienteCita";
+  FormContainer.style.display = "block";
+  FormContainer.classList.add("formAgregarPacienteCita");
 
-    var inputDni = document.createElement("input");
-    inputDni.type = "text";
-    inputDni.id = "dni";
-    inputDni.name = "dni";
-    inputDni.value =Paciente.dni;
+  var inputIdPaciente = document.createElement("input");
+  inputIdPaciente.type = "hidden";
+  inputIdPaciente.id = "pacienteid";
+  inputIdPaciente.name = "pacienteid";
+  inputIdPaciente.value = Paciente.id;
 
-    var inputFecha = document.createElement("input");
-    inputFecha.type = "date";
-    inputFecha.id = "fecha";
-    inputFecha.name = "fecha";
-    
-    var inputDetalle = document.createElement("input");
-    inputDetalle.type = "text";
-    inputDetalle.id = "detalle";
-    inputDetalle.name = "detalle";
-    inputDetalle.placeholder = "Detalle de la cita";
-    
-    var inputGuardar = document.createElement("input");
-    inputGuardar.type = "submit";
-    inputGuardar.id = "guardar";
-    inputGuardar.value = "Guardar";
-    inputGuardar.addEventListener("click", function(event) {
-        event.preventDefault();
-        alert(`Cita guardada: ${inputDni.value}, ${inputFecha.value}, ${inputDetalle.value}`);
-        //agregarCita(inputDni.value, inputFecha.value, inputDetalle.value);
-    });
+  var inputDni = document.createElement("input");
+  inputDni.type = "text";
+  inputDni.id = "dni";
+  inputDni.name = "dni";
+  inputDni.value = 'Cita para el paciente:' + Paciente.dni;
 
-    FormContainer.appendChild(inputDni);
-    FormContainer.appendChild(inputFecha);
-    FormContainer.appendChild(inputDetalle);
-    FormContainer.appendChild(inputGuardar);
-    
+  var inputFecha = document.createElement("input");
+  inputFecha.type = "date";
+  inputFecha.id = "fecha";
+  inputFecha.name = "fecha";
 
-    conteainerAgregarPaciente.appendChild(buttonCerrar);
-    conteainerAgregarPaciente.appendChild(FormContainer);
-    
-  }
+  var inputDetalle = document.createElement("input");
+  inputDetalle.type = "text";
+  inputDetalle.id = "detalle";
+  inputDetalle.name = "detalle";
+  inputDetalle.placeholder = "Detalle de la cita";
+
+  var inputGuardar = document.createElement("input");
+  inputGuardar.type = "submit";
+  inputGuardar.id = "guardar";
+  inputGuardar.value = "Guardar";
+  inputGuardar.addEventListener("click", function (event) {
+    event.preventDefault();
+    //alert(`Cita guardada:${inputFecha.value}, ${inputDetalle.value}, ${inputIdPaciente.value}`);
+    //agregarCita(inputDni.value, inputFecha.value, inputDetalle.value);
+    agregarCita(inputIdPaciente.value, inputFecha.value, inputDetalle.value);
+  });
+
+  FormContainer.appendChild(inputIdPaciente);
+  FormContainer.appendChild(inputDni);
+  FormContainer.appendChild(inputFecha);
+  FormContainer.appendChild(inputDetalle);
+  FormContainer.appendChild(inputGuardar);
+
+
+  conteainerAgregarPaciente.appendChild(buttonCerrar);
+  conteainerAgregarPaciente.appendChild(FormContainer);
+
+}
 
 // Manejar el formulario de búsqueda
-function handleFormSubmit(event,sedesids) {
+function handleFormSubmit(event, sedesids) {
   event.preventDefault();
-  console.log("Formulario enviado:sedes",sedesids);
+  console.log("Formulario enviado:sedes", sedesids);
   //alert(sedesids);
   const formData = new FormData(formBuscar);
   const dni = formData.get("dni");
-  buscarPacientePorDni(dni,sedesids);
+  buscarPacientePorDni(dni, sedesids);
 }
 
 // Manejar el logout
@@ -295,7 +303,7 @@ function fetchSedeByid(id) {
   fetch("../controllers/auth.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "get_sedebyid", iduser:id }),
+    body: JSON.stringify({ action: "get_sedebyid", iduser: id }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -310,22 +318,41 @@ function fetchSedeByid(id) {
       console.log(sedesids);
       loadInitialCitas(sedesids);
       inputFechaCitas.addEventListener("change", () => handleDateChange(sedesids));
-      formBuscar.addEventListener("submit", () => handleFormSubmit(event,sedesids));
+      formBuscar.addEventListener("submit", () => handleFormSubmit(event, sedesids));
     })
     .catch((error) => {
       console.error("Error al obtener sede:", error);
     });
 }
 
+function agregarCita(id, fecha, detalle) {
+  alert(`Cita guardada:  ${fecha}, ${detalle}, id del paciente en base de datos: ${id}`);
+  fetch("../controllers/paciente.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "agregar_cita", id: id, fecha: fecha, detalle: detalle }),
+  }).then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Cita guardada correctamente");
+        window.location.reload();
+      } else {
+        alert(data.message);
+      }
+    }).catch((error) => {
+      console.error("Error al guardar la cita:", error);
+    });
+}
+
 // Inicialización
 function initialize() {
   inputFechaCitas.value = getTodayDate();
-  
+
   //inputFechaCitas.addEventListener("change", handleDateChange);
   //formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
   fetchSedeByid(iduser);
-  
+
 
 }
 

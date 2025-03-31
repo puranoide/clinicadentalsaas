@@ -28,6 +28,14 @@ function getPacientecitasbyid($con, $id)
     return $citas;
 }
 
+function agregarPaciente($con, $pacienteid, $fecha, $detalle)
+{
+    $sql = "INSERT INTO siguiente_cita (pacienteid, fecha, detalle) VALUES (?,?,?)";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "iss", $pacienteid, $fecha, $detalle);
+    $result = mysqli_stmt_execute($stmt);
+    return $result;
+}
 
 include_once('../config/db.php');
 
@@ -54,18 +62,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Resto del código...
             try {
-                $response = getpacientebydni($conexion, $data['dni'],$data['sedes']);
+                $response = getpacientebydni($conexion, $data['dni'], $data['sedes']);
 
                 if ($response) {
                     $citas = getPacientecitasbyid($conexion, $response['id']);
                     echo json_encode(['success' => true, 'paciente' => $response, 'citas' => $citas, 'message' => 'paciente  encontrado']);
                 } else {
-                    echo json_encode(['success' => false, 'message' => 'paciente no encontrado,dni '.$data['dni']]);
+                    echo json_encode(['success' => false, 'message' => 'paciente no encontrado,dni ' . $data['dni']]);
                 }
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);
             }
             break;
+        case 'agregar_cita':
+            if (!$conexion) {
+                echo json_encode(['error' => 'No se pudo conectar a la base de datos']);
+                exit;
+            }
+            try {
+                $response = agregarPaciente($conexion, $data['id'], $data['fecha'], $data['detalle']);
+
+                if ($response) {
+                    echo json_encode(['success' => true, 'message' => 'Cita guardada correctamente']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error al guardar la cita']);
+                }
+            } catch (Exception $e) {
+                echo json_encode(['error' => $e->getMessage()]);
+            }
+            
+            break;
+        
         default:
             echo json_encode(['success' => false]);
             break;
