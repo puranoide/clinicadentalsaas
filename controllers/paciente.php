@@ -27,7 +27,7 @@ function getPacientecitasbyid($con, $id)
     }
     return $citas;
 }
-
+//fixear el nombre
 function agregarPaciente($con, $pacienteid, $fecha, $detalle)
 {
     $sql = "INSERT INTO siguiente_cita (pacienteid, fecha, detalle) VALUES (?,?,?)";
