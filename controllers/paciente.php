@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $citas = getPacientecitasbyid($conexion, $response['id']);
                     echo json_encode(['success' => true, 'paciente' => $response, 'citas' => $citas, 'message' => 'paciente  encontrado']);
                 } else {
-                    echo json_encode(['success' => false, 'message' => 'paciente no encontrado,dni ' . $data['dni']]);
+                    echo json_encode(['success' => false, 'message' => 'paciente no encontrado,dni ' . $data['dni'],'DNI'=>$data['dni']]);
                 }
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);

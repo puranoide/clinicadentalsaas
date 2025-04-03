@@ -144,15 +144,13 @@ function createCitaPorPacienteElement(cita) {
 }
 
 // Mostrar información del paciente encontrado
-function renderPaciente(data) {
+function renderPaciente(data,sedesids) {
   conteinerUsuario.style.display = "block";
   conteinerUsuario.innerHTML = "";
-
+  console.log("Recibiendo Sedes:", sedesids);
   if (!data.success) {
-    const pError = document.createElement("p");
-    pError.classList.add("error");
-    pError.textContent = data.message || "Paciente no encontrado";
-    conteinerUsuario.appendChild(pError);
+    console.log("sedes dentro de la condicion", sedesids);
+    renderPacienteNoEncontrado(data.DNI,sedesids);
     return;
   }
 
@@ -202,7 +200,7 @@ async function buscarPacientePorDni(dni, sedesids) {
     });
 
     const data = await response.json();
-    renderPaciente(data);
+    renderPaciente(data, sedesids);
   } catch (error) {
     console.error("Error al buscar paciente:", error);
     renderPaciente({ success: false, message: "Error al buscar paciente" });
@@ -342,6 +340,15 @@ function agregarCita(id, fecha, detalle) {
     }).catch((error) => {
       console.error("Error al guardar la cita:", error);
     });
+}
+
+function renderPacienteNoEncontrado(dni, sedesids) {
+  //alert("Paciente no encontrado");
+  console.log('sedes dentro de la funcion_no_encontrado', sedesids);
+  const pError = document.createElement("p");
+  pError.classList.add("error");
+  pError.textContent = "Paciente no encontrado, DNI: " + dni + ", Sedes: " + sedesids.join(", ");
+  conteinerUsuario.appendChild(pError);
 }
 
 // Inicialización
