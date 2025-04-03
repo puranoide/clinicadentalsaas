@@ -28,7 +28,7 @@ function getPacientecitasbyid($con, $id)
     return $citas;
 }
 //fixear el nombre
-function agregarPaciente($con, $pacienteid, $fecha, $detalle)
+function agregarCitaPaciente($con, $pacienteid, $fecha, $detalle)
 {
     $sql = "INSERT INTO siguiente_cita (pacienteid, fecha, detalle) VALUES (?,?,?)";
     $stmt = mysqli_prepare($con, $sql);
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
             try {
-                $response = agregarPaciente($conexion, $data['id'], $data['fecha'], $data['detalle']);
+                $response = agregarCitaPaciente($conexion, $data['id'], $data['fecha'], $data['detalle']);
 
                 if ($response) {
                     echo json_encode(['success' => true, 'message' => 'Cita guardada correctamente']);
