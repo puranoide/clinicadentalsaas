@@ -37,6 +37,16 @@ function agregarCitaPaciente($con, $pacienteid, $fecha, $detalle)
     return $result;
 }
 
+function agregarPaciente($con,$nombre, $dni, $sede, $user, $role, $codigoPaciente, $procedencia, $edad, $estado){
+
+    $sql = "INSERT INTO paciente (nombreCompleto, dni, sedeid, userid, roleid, cod_paciente, procedencia, edad, estado) VALUES (?,?,?,?,?,?,?,?,?)";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "ssiiissii", $nombre, $dni, $sede, $user, $role, $codigoPaciente, $procedencia, $edad, $estado);
+    $result = mysqli_stmt_execute($stmt);
+    return $result;
+
+}
+
 include_once('../config/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -90,6 +100,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);
             }
+            
+            break;
+        case 'add_paciente':
+            if (!$conexion) {
+                echo json_encode(['error' => 'No se pudo conectar a la base de datos']);
+                exit;
+            }
+            try {
+            $response = agregarPaciente($conexion, $data['nombreCompleto'], $data['dniI'], $data['sedeidI'], $data['useridI'], $data['roleidI'], $data['cod_pacienteI'], $data['procedenciaI'], $data['edadI'], $data['estadoI']);
+
+            if ($response) {
+                echo json_encode(['success' => true, 'message' => 'Paciente guardado correctamente']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Error al guardar el paciente']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
             
             break;
         

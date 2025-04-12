@@ -144,13 +144,13 @@ function createCitaPorPacienteElement(cita) {
 }
 
 // Mostrar información del paciente encontrado
-function renderPaciente(data,sedesids) {
+function renderPaciente(data, sedesids) {
   conteinerUsuario.style.display = "block";
   conteinerUsuario.innerHTML = "";
   console.log("Recibiendo Sedes:", sedesids);
   if (!data.success) {
     console.log("sedes dentro de la condicion", sedesids);
-    renderPacienteNoEncontrado(data.DNI,sedesids);
+    renderPacienteNoEncontrado(data.DNI, sedesids);
     return;
   }
 
@@ -348,12 +348,12 @@ function renderPacienteNoEncontrado(dni, sedesids) {
   const pError = document.createElement("p");
   pError.classList.add("error");
   pError.textContent = "Paciente no encontrado, DNI: " + dni + ", Sedes: " + sedesids.join(", ");
-  
-  const pMessage= document.createElement("p");
-  pMessage.classList.add("cuestionMensaje");
-  pMessage.textContent ="deseas registar este paciente en esta sede?"
 
-  const formAddPaciente= document.createElement("form");
+  const pMessage = document.createElement("p");
+  pMessage.classList.add("cuestionMensaje");
+  pMessage.textContent = "deseas registar este paciente en esta sede?"
+
+  const formAddPaciente = document.createElement("form");
   formAddPaciente.classList.add("formAgregarPacienteCita");
 
   //labeles
@@ -367,16 +367,16 @@ function renderPacienteNoEncontrado(dni, sedesids) {
   labelUser.textContent = "User:";
   const labelRole = document.createElement("label");
   labelRole.textContent = "Role:";
-  const labelCpaciente= document.createElement("label");
+  const labelCpaciente = document.createElement("label");
   labelCpaciente.textContent = "Codigo del paciente:";
-  const labelProcedencia= document.createElement("label");
+  const labelProcedencia = document.createElement("label");
   labelProcedencia.textContent = "Procedencia:";
-  const labelEdad= document.createElement("label");
+  const labelEdad = document.createElement("label");
   labelEdad.textContent = "Edad:";
 
   //necesitamos craear los inputs para la creacion del paciente
 
-  const NombresP= document.createElement("input");
+  const NombresP = document.createElement("input");
   NombresP.type = "text";
   NombresP.placeholder = "Nombres";
   NombresP.required = true;
@@ -388,13 +388,13 @@ function renderPacienteNoEncontrado(dni, sedesids) {
   inputDni.required = true;
   inputDni.readOnly = true;
 
-  const Sede=document.createElement("input");
+  const Sede = document.createElement("input");
   Sede.type = "number";
   Sede.placeholder = "Sede";
   Sede.value = sedesids;
   Sede.required = true;
   Sede.readOnly = true;
-  
+
 
   const userRegister = document.createElement("input");
   userRegister.type = "text";
@@ -403,29 +403,29 @@ function renderPacienteNoEncontrado(dni, sedesids) {
   userRegister.required = true;
   userRegister.readOnly = true;
 
-  const roleP= document.createElement("input");
+  const roleP = document.createElement("input");
   roleP.type = "number";
   roleP.placeholder = "Rol";
   roleP.value = 3;
   roleP.required = true;
   roleP.readOnly = true;
 
-  const cPaciente= document.createElement("input");
+  const cPaciente = document.createElement("input");
   cPaciente.type = "text";
   cPaciente.placeholder = "Codigo del paciente";
   cPaciente.required = true;
 
-  const procedenciaP= document.createElement("input");
+  const procedenciaP = document.createElement("input");
   procedenciaP.type = "text";
   procedenciaP.placeholder = "Procedencia";
   procedenciaP.required = true;
 
-  const edadF= document.createElement("input");
+  const edadF = document.createElement("input");
   edadF.type = "number";
   edadF.placeholder = "Edad";
   edadF.required = true;
 
-  const estadoP= document.createElement("input");
+  const estadoP = document.createElement("input");
   estadoP.type = "hidden";
   estadoP.placeholder = "Estado";
   estadoP.value = 1;
@@ -468,7 +468,9 @@ function renderPacienteNoEncontrado(dni, sedesids) {
     const edad = edadF.value;
     const estado = estadoP.value;
 
-    alert(`Nombres: ${nombres}, DNI: ${dni}, Sede: ${sedevalue}, User: ${user}, Role: ${role}, Codigo del paciente: ${codigoPaciente}, Procedencia: ${procedencia}, Edad: ${edad}, Estado: ${estado}`);
+    addPacienteNoexistente(nombres,dni,sedevalue,user,role,codigoPaciente,procedencia,edad,estado);
+
+    //alert(`Nombres: ${nombres}, DNI: ${dni}, Sede: ${sedevalue}, User: ${user}, Role: ${role}, Codigo del paciente: ${codigoPaciente}, Procedencia: ${procedencia}, Edad: ${edad}, Estado: ${estado}`);
   });
 
 
@@ -478,6 +480,34 @@ function renderPacienteNoEncontrado(dni, sedesids) {
   conteinerUsuario.appendChild(pMessage);
   conteinerUsuario.appendChild(formAddPaciente);
 
+}
+
+function addPacienteNoexistente(nombre,dni,sede,user,role,codigoPaciente,procedencia,edad,estado) {
+      fetch("../controllers/paciente.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "add_paciente", 
+        nombreCompleto: nombre,
+        dniI: dni,
+        sedeidI: sede,
+        useridI: user,
+        roleidI: role,
+        cod_pacienteI: codigoPaciente,
+        procedenciaI: procedencia,
+        edadI: edad,
+        estadoI: estado
+        }),
+      }).then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Paciente guardado correctamente");
+          window.location.reload();
+        } else {
+          alert(data.message);
+        }
+      }).catch((error) => {
+        console.error("Error al guardar el paciente:", error);
+      })
 }
 
 // Inicialización
