@@ -264,6 +264,21 @@ header h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+}
+.agregar_paciente{
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    color: #76a0ae;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
 }
 
 .agregar_cita:hover {

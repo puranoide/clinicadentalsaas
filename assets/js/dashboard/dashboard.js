@@ -187,7 +187,43 @@ function renderPaciente(data, sedesids) {
   buttonAgregarCita.textContent = "Agregar Cita";
   buttonAgregarCita.addEventListener("click", () => renderAgregarPaciente(paciente));
 
-  conteinerUsuario.append(pNombre, pCodPaciente, pEstado, divCitas, buttonAgregarCita);
+  const buttonAgregarFechaPago = document.createElement("button");
+  buttonAgregarFechaPago.classList.add("agregar_cita");
+  buttonAgregarFechaPago.textContent = "Agregar Fecha de Pago";
+
+  buttonAgregarFechaPago.addEventListener("click", () =>
+    renderAgregarFechaPago(paciente)
+  );
+
+
+  conteinerUsuario.append(pNombre, pCodPaciente, pEstado, divCitas, buttonAgregarCita, buttonAgregarFechaPago);
+}
+
+function renderAgregarFechaPago(paciente) {
+  alert("agregar fecha de pago para este paciente"+paciente.id);
+  conteainerAgregarPaciente.style.display = "block";
+  var buttonCerrar = document.createElement("button");
+  buttonCerrar.classList.add("cerrarButtonFloat");
+  buttonCerrar.textContent = "Cerrar";
+  buttonCerrar.addEventListener("click", function () {
+    conteainerAgregarPaciente.style.display = "none";
+    conteainerAgregarPaciente.innerHTML = "";
+  });
+
+  var FormContainer = document.createElement("form");
+  FormContainer.id = "formAgregarPacientePago";
+  FormContainer.style.display = "block";
+  FormContainer.classList.add("formAgregarPacienteCita");
+
+  const inputPacienteid = document.createElement("input");
+  inputPacienteid.type = "number";
+  inputPacienteid.name = "pacienteid";
+  inputPacienteid.value = paciente.id;
+
+  FormContainer.appendChild(inputPacienteid);
+
+  conteainerAgregarPaciente.appendChild(buttonCerrar);
+  conteainerAgregarPaciente.appendChild(FormContainer);
 }
 
 // Buscar paciente por DNI
@@ -468,10 +504,12 @@ function renderPacienteNoEncontrado(dni, sedesids) {
     const edad = edadF.value;
     const estado = estadoP.value;
 
-    addPacienteNoexistente(nombres,dni,sedevalue,user,role,codigoPaciente,procedencia,edad,estado);
+    addPacienteNoexistente(nombres, dni, sedevalue, user, role, codigoPaciente, procedencia, edad, estado);
 
     //alert(`Nombres: ${nombres}, DNI: ${dni}, Sede: ${sedevalue}, User: ${user}, Role: ${role}, Codigo del paciente: ${codigoPaciente}, Procedencia: ${procedencia}, Edad: ${edad}, Estado: ${estado}`);
   });
+
+  submitButton.classList.add("agregar_paciente");
 
 
 
@@ -482,32 +520,33 @@ function renderPacienteNoEncontrado(dni, sedesids) {
 
 }
 
-function addPacienteNoexistente(nombre,dni,sede,user,role,codigoPaciente,procedencia,edad,estado) {
-      fetch("../controllers/paciente.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "add_paciente", 
-        nombreCompleto: nombre,
-        dniI: dni,
-        sedeidI: sede,
-        useridI: user,
-        roleidI: role,
-        cod_pacienteI: codigoPaciente,
-        procedenciaI: procedencia,
-        edadI: edad,
-        estadoI: estado
-        }),
-      }).then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Paciente guardado correctamente");
-          window.location.reload();
-        } else {
-          alert(data.message);
-        }
-      }).catch((error) => {
-        console.error("Error al guardar el paciente:", error);
-      })
+function addPacienteNoexistente(nombre, dni, sede, user, role, codigoPaciente, procedencia, edad, estado) {
+  fetch("../controllers/paciente.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "add_paciente",
+      nombreCompleto: nombre,
+      dniI: dni,
+      sedeidI: sede,
+      useridI: user,
+      roleidI: role,
+      cod_pacienteI: codigoPaciente,
+      procedenciaI: procedencia,
+      edadI: edad,
+      estadoI: estado
+    }),
+  }).then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Paciente guardado correctamente");
+        window.location.reload();
+      } else {
+        alert(data.message);
+      }
+    }).catch((error) => {
+      console.error("Error al guardar el paciente:", error);
+    })
 }
 
 // Inicialización
