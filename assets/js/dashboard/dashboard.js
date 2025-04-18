@@ -200,7 +200,7 @@ function renderPaciente(data, sedesids) {
 }
 
 function renderAgregarFechaPago(paciente) {
-  alert("agregar fecha de pago para este paciente"+paciente.id);
+  //alert("agregar fecha de pago para este paciente"+paciente.id);
   conteainerAgregarPaciente.style.display = "block";
   var buttonCerrar = document.createElement("button");
   buttonCerrar.classList.add("cerrarButtonFloat");
@@ -219,6 +219,7 @@ function renderAgregarFechaPago(paciente) {
   inputPacienteid.type = "number";
   inputPacienteid.name = "pacienteid";
   inputPacienteid.value = paciente.id;
+
 
   FormContainer.appendChild(inputPacienteid);
 
