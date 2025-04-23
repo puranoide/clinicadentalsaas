@@ -553,7 +553,7 @@ function addPacienteNoexistente(nombre, dni, sede, user, role, codigoPaciente, p
 // Inicialización
 function initialize() {
   inputFechaCitas.value = getTodayDate();
-
+  alert("FUNCIONO")
   //inputFechaCitas.addEventListener("change", handleDateChange);
   //formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);
