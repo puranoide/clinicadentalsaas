@@ -21,7 +21,7 @@ if (!isset($_SESSION['correo'])) {
 
 <body>
     <header>
-        <h1>ODAM-PLATAFORMA</h1>
+        <h1>ODAM-PLATAFORMA RAMA</h1>
     </header>
 
     <div class="dashboard">
