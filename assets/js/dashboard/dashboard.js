@@ -115,7 +115,7 @@ function createLoadingSpinner() {
 
 // Cargar citas iniciales al iniciar la página
 async function loadInitialCitas(sedes) {
-  alert(sedes)
+  //alert(sedes)
   const loadingMessage = createLoadingSpinner();
   conteinerCitas.appendChild(loadingMessage);
 
@@ -543,7 +543,7 @@ function addPacienteNoexistente(nombre, dni, sede, user, role, codigoPaciente, p
         alert("Paciente guardado correctamente");
         window.location.reload();
       } else {
-        alert(data.message);
+        console.log(data);
       }
     }).catch((error) => {
       console.error("Error al guardar el paciente:", error);
@@ -553,7 +553,7 @@ function addPacienteNoexistente(nombre, dni, sede, user, role, codigoPaciente, p
 // Inicialización
 function initialize() {
   inputFechaCitas.value = getTodayDate();
-  alert("FUNCIONO")
+ // alert("FUNCIONO")
   //inputFechaCitas.addEventListener("change", handleDateChange);
   //formBuscar.addEventListener("submit", handleFormSubmit);
   btnSalir.addEventListener("click", handleLogout);

@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "SaasDental";
+$database = "saas_cd";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
 
