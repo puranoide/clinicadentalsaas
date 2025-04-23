@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$username = "root";
-$password = "";
-$database = "saas_cd";
+$username = "u685818680_admingab";
+$password = "T9p;*cv9os@v";
+$database = "u685818680_saas_cd";
 $conexion = mysqli_connect($servername,$username,$password,$database);
 
 
@@ -17,14 +17,14 @@ if (!$conexion) {
 }
 	
 $servername = "localhost";
-$username = "u685818680_puranoadmin";
-$password = "yS1~xyK!8+";
-$database = "u685818680_SaasDental";
+$username = "u685818680_admingab";
+$password = "T9p;*cv9os@v";
+$database = "u685818680_saas_cd";
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "SaasDental";
+$database = "saas_cd";
 
 
 CREATE TABLE SaaS_CD.sede (
